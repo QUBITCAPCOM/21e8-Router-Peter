@@ -11,11 +11,13 @@ int main(int argc, char const * argv[]){
     //Start router
     int port = 8080;    
     int port_con = 8080;
+    std::string router_address = "10.147.20.40";
     std::string address = "10.147.20.7";
     if(argc > 1){
-        port = stoi(argv[1]);
-        address = argv[2];
-        port_con = stoi(argv[3]);
+        router_address = argv[1];
+        port = stoi(argv[2]);
+        address = argv[3];
+        port_con = stoi(argv[4]);
     }
     boost::asio::io_service io_service;
     boost::asio::io_service router_ioservice;
@@ -23,7 +25,7 @@ int main(int argc, char const * argv[]){
 
     //Start router
     printf("Starting Router connecting on Port %d, connecting on address %s and port %d \n", port, address.c_str(), port_con);
-    Router router(io_service, port, address, port_con, router_ioservice);  
+    Router router(io_service, router_address, port, address, port_con, router_ioservice);  
 
     std::thread serv([&]()
         {

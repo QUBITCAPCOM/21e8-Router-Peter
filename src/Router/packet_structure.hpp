@@ -71,7 +71,8 @@ class Packet
             std::cout << pkt.header.length << " | " << pkt.header.hopLimit << std::endl;
             std::cout << pkt.header.saddr << std::endl;
             std::cout << dest_address << std::endl;
-            std::cout << pkt.payload.payload << std::endl;
+            string payload_out = to_hash<uint64_t>(pkt.payload.payload);
+            std::cout << payload_out << std::endl;
         };
 
         std::string get_dstAddress(){

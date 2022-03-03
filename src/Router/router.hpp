@@ -91,6 +91,8 @@ class cli_handler : public boost::enable_shared_from_this<cli_handler>, public r
                 //cache packet
                 cache_packet();
                 string client = sockaddr_tostring(socket().remote_endpoint());
+                Packet dump (data);
+                dump.dump();
 
                 *new_pkt = data;
 
@@ -224,7 +226,7 @@ class Router
     public:
     
     //constructor for accepting connection from client
-    Router(boost::asio::io_service& io_service, int port, std::string address, int port_con, boost::asio::io_service& router_ioservice): acceptor_(io_service, tcp::endpoint(boost::asio::ip::address::from_string("10.147.20.40"), port)), router_sock(router_ioservice)
+    Router(boost::asio::io_service& io_service, string router_address, int port, std::string address, int port_con, boost::asio::io_service& router_ioservice): acceptor_(io_service, tcp::endpoint(boost::asio::ip::address::from_string(router_address), port)), router_sock(router_ioservice)
     {
 
         cout << "Router LISTENING on " << acceptor_.local_endpoint() << endl;
